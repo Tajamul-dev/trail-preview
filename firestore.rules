@@ -1,0 +1,65 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global default-deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Only Global Futura team emails may access company data
+    function isTeamMember() {
+      return isSignedIn() && (
+        request.auth.token.email == 'tajamul.sales@globaloils.us' ||
+        request.auth.token.email == 'strangersyco@gmail.com' ||
+        request.auth.token.email == 'operations.admin@globaloils.us' ||
+        request.auth.token.email == 'salman.sales@globaloils.us' ||
+        request.auth.token.email == 'khalid.wh@globaloils.us'
+      );
+    }
+
+    // Orders Collection
+    match /orders/{orderId} {
+      allow read: if isTeamMember();
+      allow write: if isTeamMember();
+    }
+
+    // Inventory Collection
+    match /inventory/{itemId} {
+      allow read: if isTeamMember();
+      allow write: if isTeamMember();
+    }
+
+    // Invoices Collection
+    match /invoices/{invoiceId} {
+      allow read: if isTeamMember();
+      allow write: if isTeamMember();
+    }
+
+    // Negotiations Collection
+    match /negotiations/{negoId} {
+      allow read: if isTeamMember();
+      allow write: if isTeamMember();
+    }
+
+    // Activity Log Collection
+    match /activity/{actId} {
+      allow read: if isTeamMember();
+      allow create: if isTeamMember();
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      allow read: if isTeamMember();
+      allow write: if isTeamMember() && (request.auth.uid == userId || resource == null);
+    }
+
+    // Test connection document
+    match /test/{docId} {
+      allow read: if true;
+    }
+  }
+}
