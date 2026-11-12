@@ -53,6 +53,12 @@ export const Navigation: React.FC<NavigationProps> = ({
       sublabel: 'Executive Operations Hub',
       icon: LayoutDashboard,
     },
+    deliveries: {
+      label: 'Deliveries & Production Hub',
+      sublabel: 'Official 11.12.2026 Deliveries, 361.88 Pallet Matrix & Product Sheets',
+      icon: Truck,
+      badge: '11.12.2026',
+    },
     orders: {
       label: 'Order Dashboard',
       sublabel: 'Main Sheet & Party Drilldown',
@@ -102,6 +108,7 @@ export const Navigation: React.FC<NavigationProps> = ({
 
   const moduleVisible = (id: ModuleId) => !visibleModules || visibleModules.includes(id);
   const quickSheets: { id: ModuleId; label: string; badge?: string }[] = ([
+    { id: 'deliveries', label: 'Deliveries & Production', badge: '11.12.2026' },
     { id: 'orders', label: 'Order Dashboard', badge: 'Interactive BOM' },
     { id: 'dispatch', label: 'Dispatches', badge: `${dispatchCount} Shipments` },
     { id: 'packing', label: 'Packing Tracker', badge: `${orderCount} Active` },

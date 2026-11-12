@@ -212,6 +212,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     borderAccent: string;
   }[] = [
     {
+      id: 'deliveries',
+      title: 'Deliveries & Production Hub',
+      badge: '11.12.2026 Verified',
+      badgeColor: 'bg-emerald-100 text-emerald-900 dark:bg-emerald-950 dark:text-emerald-200 border-emerald-300 dark:border-emerald-800',
+      desc: 'Official 14-page Pending Deliveries schedule, 361.88 Pallet Production Matrix & 6 Product Order Breakdown Sheets with 1:1 PDF fidelity.',
+      stat: '14 Regional Pages • 45 Clients • 361.88 Pallets • Exact Bottle Visuals',
+      icon: Truck,
+      accent: 'from-amber-500/15 via-red-500/10 to-emerald-500/10 hover:from-amber-500/25',
+      borderAccent: 'border-amber-400 dark:border-amber-600',
+    },
+    {
       id: 'orders',
       title: 'Order Dashboard',
       badge: 'Interactive BOM',

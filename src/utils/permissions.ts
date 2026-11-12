@@ -54,8 +54,8 @@ export const DEFAULT_ROLE_RESPONSIBILITIES: Record<StaffMemberAccess['role'], st
 
 export function getPermissionsForRolePreset(role: StaffMemberAccess['role']): UserPermissions {
   const base = getBaseRolePermissions(role);
-  // Legacy modules are visible by default; Super Admin can switch them off per person
-  return { ...base, ordersView: true, dispatchView: true, mastersheetView: true };
+  // Deliveries and production matrix are visible by default
+  return { ...base, deliveriesView: true, ordersView: true, dispatchView: true, mastersheetView: true };
 }
 
 function getBaseRolePermissions(role: StaffMemberAccess['role']): UserPermissions {

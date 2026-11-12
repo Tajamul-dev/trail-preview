@@ -1,5 +1,6 @@
 export type ModuleId =
   | 'dashboard'
+  | 'deliveries'
   | 'packing'
   | 'inventory'
   | 'oilcost'
@@ -31,6 +32,7 @@ export interface UserPermissions {
   oilcostOverrideFloor: boolean;
   canClearData: boolean;
   canManageAccess: boolean;
+  deliveriesView?: boolean;
   // Legacy module visibility (Order Dashboard / Dispatches / Master Sheet)
   ordersView?: boolean;
   dispatchView?: boolean;
@@ -587,6 +589,9 @@ export interface PendingDeliveryItem {
   remarks: string;
   status?: string;     // '' (auto) | Ready | Dispatched | Delivered
   imageUrl?: string;   // product image thumbnail (data URL)
+  isReady?: boolean;
+  specialBadge?: string;
+  rowSpanNote?: string;
 }
 
 export interface PendingDeliveryOrder {
@@ -597,10 +602,12 @@ export interface PendingDeliveryOrder {
   salesExecutive: string;
   address: string;
   region: string;        // e.g. "Bronx", "New Jersey", "Brooklyn"
+  calloutBox?: string;
+  calloutBanner?: string;
   items: PendingDeliveryItem[];
   sourceSheet?: string;  // original workbook sheet (e.g. "Table 1") for like-for-like export
   sourceFile?: string;
-  updatedAt: string;
+  updatedAt?: string;
 }
 
 export interface CustomerAccount {

@@ -34,6 +34,7 @@ import {
 } from './types';
 import { Header } from './components/Header';
 import { Navigation } from './components/Navigation';
+import { PendingDeliveriesSection } from './components/PendingDeliveriesSection';
 import { OrderDashboardView } from './components/OrderDashboardView';
 import { DispatchView } from './components/DispatchView';
 import { MasterSheetView } from './components/MasterSheetView';
@@ -846,6 +847,7 @@ export default function App() {
 
   const moduleVisible: Record<ModuleId, boolean> = {
     dashboard: effectiveAccess.permissions.dashboardView,
+    deliveries: effectiveAccess.permissions.deliveriesView !== false,
     orders: effectiveAccess.permissions.ordersView !== false,
     dispatch: effectiveAccess.permissions.dispatchView !== false,
     packing: effectiveAccess.permissions.packingView,
@@ -1062,6 +1064,11 @@ export default function App() {
               Your account does not have permission to view this module. Please contact your Super Admin in the Access Control console to grant access.
             </p>
           </div>
+        )}
+
+        {/* NEW: Deliveries & Production Hub (Official 14-page Deliveries, 361.88 Pallet Matrix & Product Sheets) */}
+        {effectiveModule === 'deliveries' && (
+          <PendingDeliveriesSection onNotify={msg => showToast(msg, 'info')} />
         )}
 
         {/* NEW: Qwen Order Dashboard (Sheet Tab 1 & Tab 2 Popup) */}
